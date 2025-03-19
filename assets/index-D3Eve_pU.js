@@ -16414,6 +16414,126 @@ const wallet = new l();
 wallet.setLogLevel("debug");
 wallet.open();
 
+/**
+ * @license lucide-react v0.483.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+const mergeClasses = (...classes) => classes.filter((className, index, array) => {
+  return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
+}).join(" ").trim();
+
+/**
+ * @license lucide-react v0.483.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+var defaultAttributes = {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: 24,
+  height: 24,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round"
+};
+
+/**
+ * @license lucide-react v0.483.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const Icon = reactExports.forwardRef(
+  ({
+    color = "currentColor",
+    size = 24,
+    strokeWidth = 2,
+    absoluteStrokeWidth,
+    className = "",
+    children,
+    iconNode,
+    ...rest
+  }, ref) => {
+    return reactExports.createElement(
+      "svg",
+      {
+        ref,
+        ...defaultAttributes,
+        width: size,
+        height: size,
+        stroke: color,
+        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
+        className: mergeClasses("lucide", className),
+        ...rest
+      },
+      [
+        ...iconNode.map(([tag, attrs]) => reactExports.createElement(tag, attrs)),
+        ...Array.isArray(children) ? children : [children]
+      ]
+    );
+  }
+);
+
+/**
+ * @license lucide-react v0.483.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const createLucideIcon = (iconName, iconNode) => {
+  const Component = reactExports.forwardRef(
+    ({ className, ...props }, ref) => reactExports.createElement(Icon, {
+      ref,
+      iconNode,
+      className: mergeClasses(`lucide-${toKebabCase(iconName)}`, className),
+      ...props
+    })
+  );
+  Component.displayName = `${iconName}`;
+  return Component;
+};
+
+/**
+ * @license lucide-react v0.483.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$1 = [
+  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
+  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+];
+const Copy = createLucideIcon("Copy", __iconNode$1);
+
+/**
+ * @license lucide-react v0.483.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode = [
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
+];
+const ExternalLink = createLucideIcon("ExternalLink", __iconNode);
+
 const TESTNET_FEDERATION_CODE = "fed11qgqrgvnhwden5te0v9k8q6rp9ekh2arfdeukuet595cr2ttpd3jhq6rzve6zuer9wchxvetyd938gcewvdhk6tcqqysptkuvknc7erjgf4em3zfh90kffqf9srujn6q53d6r056e4apze5cw27h75";
 globalThis.wallet = wallet;
 const useIsOpen = () => {
@@ -16435,16 +16555,14 @@ const useBalance = (checkIsOpen) => {
       checkIsOpen();
       setBalance(balance2);
     });
-    return () => {
-      unsubscribe();
-    };
+    return () => unsubscribe();
   }, [checkIsOpen]);
   return balance;
 };
 const App = () => {
   const { open, checkIsOpen } = useIsOpen();
   const balance = useBalance(checkIsOpen);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-black p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-2xl mx-auto space-y-8", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(WalletStatus, { open, checkIsOpen, balance }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(JoinFederation, { open, checkIsOpen }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(GenerateLightningInvoice, {}),
@@ -16452,29 +16570,28 @@ const App = () => {
     /* @__PURE__ */ jsxRuntimeExports.jsx(SendLightning, {})
   ] }) });
 };
-const WalletStatus = ({
-  open,
-  checkIsOpen,
-  balance
-}) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Wallet Status" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "row", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Is Wallet Open?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: open ? "Yes" : "No" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => checkIsOpen(), children: "Check" })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "row", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Balance:" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "balance", children: balance }),
-      "sats"
+const WalletStatus = ({ open, checkIsOpen, balance }) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 p-6 rounded-lg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-4", children: "Wallet Status" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Wallet Status" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: open ? "text-green-400" : "text-red-400", children: open ? "Open" : "Closed" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: checkIsOpen, className: "text-sm hover:cursor-pointer", children: "Check" })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Balance" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+          balance,
+          " sats"
+        ] })
+      ] })
     ] })
   ] });
 };
-const JoinFederation = ({
-  open,
-  checkIsOpen
-}) => {
+const JoinFederation = ({ open, checkIsOpen }) => {
   const [inviteCode, setInviteCode] = reactExports.useState(TESTNET_FEDERATION_CODE);
   const [joinResult, setJoinResult] = reactExports.useState(null);
   const [joinError, setJoinError] = reactExports.useState("");
@@ -16482,38 +16599,33 @@ const JoinFederation = ({
   const joinFederation = async (e) => {
     e.preventDefault();
     checkIsOpen();
-    console.log("Joining federation:", inviteCode);
     try {
       setJoining(true);
-      const res = await wallet.joinFederation(inviteCode);
-      console.log("join federation res", res);
-      setJoinResult("Joined!");
+      await wallet.joinFederation(inviteCode);
+      setJoinResult("Successfully joined federation");
       setJoinError("");
     } catch (e2) {
-      console.log("Error joining federation", e2);
       setJoinError(typeof e2 === "object" ? e2.toString() : e2);
       setJoinResult("");
     } finally {
       setJoining(false);
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Join Federation" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: joinFederation, className: "row", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 p-6 rounded-lg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-4", children: "Join Federation" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: joinFederation, className: "space-y-4", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "input",
         {
-          className: "ecash-input",
-          placeholder: "Invite Code...",
-          required: true,
+          placeholder: "Federation invite code...",
           value: inviteCode,
           onChange: (e) => setInviteCode(e.target.value),
           disabled: open
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", disabled: open || joining, children: "Join" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", disabled: open || joining, className: "w-full hover:cursor-pointer", children: joining ? "Joining..." : "Join Federation" })
     ] }),
-    !joinResult && open && /* @__PURE__ */ jsxRuntimeExports.jsx("i", { children: "(You've already joined a federation)" }),
+    !joinResult && open && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-gray-400 italic", children: "Already joined a federation" }),
     joinResult && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "success", children: joinResult }),
     joinError && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "error", children: joinError })
   ] });
@@ -16525,29 +16637,27 @@ const RedeemEcash = () => {
   const handleRedeem = async (e) => {
     e.preventDefault();
     try {
-      const res = await wallet.mint.redeemEcash(ecashInput);
-      console.log("redeem ecash res", res);
-      setRedeemResult("Redeemed!");
+      await wallet.mint.redeemEcash(ecashInput);
+      setRedeemResult("Successfully redeemed ecash");
       setRedeemError("");
+      setEcashInput("");
     } catch (e2) {
-      console.log("Error redeeming ecash", e2);
       setRedeemError(e2);
       setRedeemResult("");
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Redeem Ecash" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleRedeem, className: "row", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 p-6 rounded-lg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-4", children: "Redeem Ecash" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleRedeem, className: "space-y-4", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "input",
         {
-          placeholder: "Long ecash string...",
-          required: true,
+          placeholder: "Enter ecash string...",
           value: ecashInput,
           onChange: (e) => setEcashInput(e.target.value)
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", children: "redeem" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", className: "w-full hover:cursor-pointer", children: "Redeem Ecash" })
     ] }),
     redeemResult && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "success", children: redeemResult }),
     redeemError && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "error", children: redeemError })
@@ -16561,27 +16671,26 @@ const SendLightning = () => {
     e.preventDefault();
     try {
       await wallet.lightning.payInvoice(lightningInput);
-      setLightningResult("Paid!");
+      setLightningResult("Payment successful");
       setLightningError("");
+      setLightningInput("");
     } catch (e2) {
-      console.log("Error paying lightning", e2);
       setLightningError(e2);
       setLightningResult("");
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Pay Lightning" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "row", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 p-6 rounded-lg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-4", children: "Pay Lightning Invoice" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "space-y-4", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "input",
         {
-          placeholder: "lnbc...",
-          required: true,
+          placeholder: "Enter lightning invoice (lnbc...)",
           value: lightningInput,
           onChange: (e) => setLightningInput(e.target.value)
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", children: "pay" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", className: "w-full hover:cursor-pointer", children: "Pay Invoice" })
     ] }),
     lightningResult && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "success", children: lightningResult }),
     lightningError && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "error", children: lightningError })
@@ -16599,59 +16708,49 @@ const GenerateLightningInvoice = () => {
     setError("");
     setGenerating(true);
     try {
-      const response = await wallet.lightning.createInvoice(
-        Number(amount),
-        description
-      );
+      const response = await wallet.lightning.createInvoice(Number(amount), description);
       setInvoice(response.invoice);
     } catch (e2) {
-      console.error("Error generating Lightning invoice", e2);
       setError(e2 instanceof Error ? e2.message : String(e2));
     } finally {
       setGenerating(false);
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { children: "Generate Lightning Invoice" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "input-group", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "amount", children: "Amount (sats):" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            id: "amount",
-            type: "number",
-            placeholder: "Enter amount",
-            required: true,
-            value: amount,
-            onChange: (e) => setAmount(e.target.value)
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "input-group", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "description", children: "Description:" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "input",
-          {
-            id: "description",
-            placeholder: "Enter description",
-            required: true,
-            value: description,
-            onChange: (e) => setDescription(e.target.value)
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", disabled: generating, children: generating ? "Generating..." : "Generate Invoice" })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 p-6 rounded-lg", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-4", children: "Generate Lightning Invoice" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "space-y-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "input",
+        {
+          type: "number",
+          placeholder: "Amount (sats)",
+          value: amount,
+          onChange: (e) => setAmount(e.target.value)
+        }
+      ) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "input",
+        {
+          placeholder: "Description",
+          value: description,
+          onChange: (e) => setDescription(e.target.value)
+        }
+      ) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", disabled: generating, className: "w-full hover:cursor-pointer", children: generating ? "Generating..." : "Generate Invoice" })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      "mutinynet faucet:",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "https://faucet.mutinynet.com/", target: "_blank", children: "https://faucet.mutinynet.com/" })
-    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 text-gray-400", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "https://faucet.mutinynet.com/", target: "_blank", rel: "noopener noreferrer", className: "flex items-center gap-2 hover:text-gray-200", children: [
+      "Mutinynet Faucet ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { size: 16 })
+    ] }) }),
     invoice && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "success", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Generated Invoice:" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "invoice-wrap", children: invoice }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => navigator.clipboard.writeText(invoice), children: "Copy" })
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2 mt-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium", children: "Generated Invoice:" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => navigator.clipboard.writeText(invoice), className: "flex items-center gap-1 hover:cursor-pointer", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { size: 16 }),
+          " Copy"
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "invoice-wrap", children: invoice })
     ] }),
     error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "error", children: error })
   ] });
@@ -16660,4 +16759,4 @@ const GenerateLightningInvoice = () => {
 ReactDOM.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(React$2.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) })
 );
-//# sourceMappingURL=index-BGIfmo-C.js.map
+//# sourceMappingURL=index-D3Eve_pU.js.map
