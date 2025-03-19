@@ -1,16 +1,14 @@
 import { useCallback, useEffect, useState } from 'react'
 import { wallet } from './wallet'
+import { Copy, ExternalLink } from 'lucide-react'
 
-const TESTNET_FEDERATION_CODE =
-  'fed11qgqrgvnhwden5te0v9k8q6rp9ekh2arfdeukuet595cr2ttpd3jhq6rzve6zuer9wchxvetyd938gcewvdhk6tcqqysptkuvknc7erjgf4em3zfh90kffqf9srujn6q53d6r056e4apze5cw27h75'
+const TESTNET_FEDERATION_CODE = 'fed11qgqrgvnhwden5te0v9k8q6rp9ekh2arfdeukuet595cr2ttpd3jhq6rzve6zuer9wchxvetyd938gcewvdhk6tcqqysptkuvknc7erjgf4em3zfh90kffqf9srujn6q53d6r056e4apze5cw27h75'
 
-// Expose the wallet to the global window object for testing
 // @ts-ignore
 globalThis.wallet = wallet
 
 const useIsOpen = () => {
   const [open, setIsOpen] = useState(false)
-
   const checkIsOpen = useCallback(() => {
     if (open !== wallet.isOpen()) {
       setIsOpen(wallet.isOpen())
@@ -29,16 +27,10 @@ const useBalance = (checkIsOpen: () => void) => {
 
   useEffect(() => {
     const unsubscribe = wallet.balance.subscribeBalance((balance) => {
-      // checks if the wallet is open when the first
-      // subscription event fires.
-      // TODO: make a subscription to the wallet open status
       checkIsOpen()
       setBalance(balance)
     })
-
-    return () => {
-      unsubscribe()
-    }
+    return () => unsubscribe()
   }, [checkIsOpen])
 
   return balance
@@ -49,51 +41,40 @@ const App = () => {
   const balance = useBalance(checkIsOpen)
 
   return (
-    <>
-      <main>
+    <div className="min-h-screen bg-black p-6">
+      <div className="max-w-2xl mx-auto space-y-8">
         <WalletStatus open={open} checkIsOpen={checkIsOpen} balance={balance} />
         <JoinFederation open={open} checkIsOpen={checkIsOpen} />
         <GenerateLightningInvoice />
         <RedeemEcash />
         <SendLightning />
-      </main>
-    </>
-  )
-}
-
-const WalletStatus = ({
-  open,
-  checkIsOpen,
-  balance,
-}: {
-  open: boolean
-  checkIsOpen: () => void
-  balance: number
-}) => {
-  return (
-    <div className="section">
-      <h3>Wallet Status</h3>
-      <div className="row">
-        <strong>Is Wallet Open?</strong>
-        <div>{open ? 'Yes' : 'No'}</div>
-        <button onClick={() => checkIsOpen()}>Check</button>
-      </div>
-      <div className="row">
-        <strong>Balance:</strong>
-        <div className="balance">{balance}</div>
-        sats
       </div>
     </div>
   )
 }
 
-const JoinFederation = ({
-  open,
-  checkIsOpen,
-}: {
-  open: boolean
-  checkIsOpen: () => void
-}) => {
+const WalletStatus = ({ open, checkIsOpen, balance }: { open: boolean; checkIsOpen: () => void; balance: number }) => {
+  return (
+    <div className="bg-gray-900 p-6 rounded-lg">
+      <h2 className="text-xl font-semibold mb-4">Wallet Status</h2>
+      <div className="space-y-4">
+        <div className="flex justify-between items-center">
+          <span>Wallet Status</span>
+          <div className="flex items-center gap-4">
+            <span className={open ? 'text-green-400' : 'text-red-400'}>{open ? 'Open' : 'Closed'}</span>
+            <button onClick={checkIsOpen} className="text-sm hover:cursor-pointer">Check</button>
+          </div>
+        </div>
+        <div className="flex justify-between items-center">
+          <span>Balance</span>
+          <span>{balance} sats</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const JoinFederation = ({ open, checkIsOpen }: { open: boolean; checkIsOpen: () => void }) => {
   const [inviteCode, setInviteCode] = useState(TESTNET_FEDERATION_CODE)
   const [joinResult, setJoinResult] = useState<string | null>(null)
   const [joinError, setJoinError] = useState('')
@@ -102,17 +83,13 @@ const JoinFederation = ({
   const joinFederation = async (e: React.FormEvent) => {
     e.preventDefault()
     checkIsOpen()
-
-    console.log('Joining federation:', inviteCode)
     try {
       setJoining(true)
-      const res = await wallet.joinFederation(inviteCode)
-      console.log('join federation res', res)
-      setJoinResult('Joined!')
+      await wallet.joinFederation(inviteCode)
+      setJoinResult('Successfully joined federation')
       setJoinError('')
     } catch (e: any) {
-      console.log('Error joining federation', e)
-      setJoinError(typeof e === 'object' ? e.toString() : (e as string))
+      setJoinError(typeof e === 'object' ? e.toString() : e)
       setJoinResult('')
     } finally {
       setJoining(false)
@@ -120,22 +97,20 @@ const JoinFederation = ({
   }
 
   return (
-    <div className="section">
-      <h3>Join Federation</h3>
-      <form onSubmit={joinFederation} className="row">
+    <div className="bg-gray-900 p-6 rounded-lg">
+      <h2 className="text-xl font-semibold mb-4">Join Federation</h2>
+      <form onSubmit={joinFederation} className="space-y-4">
         <input
-          className="ecash-input"
-          placeholder="Invite Code..."
-          required
+          placeholder="Federation invite code..."
           value={inviteCode}
           onChange={(e) => setInviteCode(e.target.value)}
           disabled={open}
         />
-        <button type="submit" disabled={open || joining}>
-          Join
+        <button type="submit" disabled={open || joining} className="w-full hover:cursor-pointer">
+          {joining ? 'Joining...' : 'Join Federation'}
         </button>
       </form>
-      {!joinResult && open && <i>(You've already joined a federation)</i>}
+      {!joinResult && open && <p className="mt-2 text-gray-400 italic">Already joined a federation</p>}
       {joinResult && <div className="success">{joinResult}</div>}
       {joinError && <div className="error">{joinError}</div>}
     </div>
@@ -150,28 +125,26 @@ const RedeemEcash = () => {
   const handleRedeem = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const res = await wallet.mint.redeemEcash(ecashInput)
-      console.log('redeem ecash res', res)
-      setRedeemResult('Redeemed!')
+      await wallet.mint.redeemEcash(ecashInput)
+      setRedeemResult('Successfully redeemed ecash')
       setRedeemError('')
+      setEcashInput('')
     } catch (e) {
-      console.log('Error redeeming ecash', e)
       setRedeemError(e as string)
       setRedeemResult('')
     }
   }
 
   return (
-    <div className="section">
-      <h3>Redeem Ecash</h3>
-      <form onSubmit={handleRedeem} className="row">
+    <div className="bg-gray-900 p-6 rounded-lg">
+      <h2 className="text-xl font-semibold mb-4">Redeem Ecash</h2>
+      <form onSubmit={handleRedeem} className="space-y-4">
         <input
-          placeholder="Long ecash string..."
-          required
+          placeholder="Enter ecash string..."
           value={ecashInput}
           onChange={(e) => setEcashInput(e.target.value)}
         />
-        <button type="submit">redeem</button>
+        <button type="submit" className="w-full hover:cursor-pointer">Redeem Ecash</button>
       </form>
       {redeemResult && <div className="success">{redeemResult}</div>}
       {redeemError && <div className="error">{redeemError}</div>}
@@ -188,26 +161,25 @@ const SendLightning = () => {
     e.preventDefault()
     try {
       await wallet.lightning.payInvoice(lightningInput)
-      setLightningResult('Paid!')
+      setLightningResult('Payment successful')
       setLightningError('')
+      setLightningInput('')
     } catch (e) {
-      console.log('Error paying lightning', e)
       setLightningError(e as string)
       setLightningResult('')
     }
   }
 
   return (
-    <div className="section">
-      <h3>Pay Lightning</h3>
-      <form onSubmit={handleSubmit} className="row">
+    <div className="bg-gray-900 p-6 rounded-lg">
+      <h2 className="text-xl font-semibold mb-4">Pay Lightning Invoice</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
-          placeholder="lnbc..."
-          required
+          placeholder="Enter lightning invoice (lnbc...)"
           value={lightningInput}
           onChange={(e) => setLightningInput(e.target.value)}
         />
-        <button type="submit">pay</button>
+        <button type="submit" className="w-full hover:cursor-pointer">Pay Invoice</button>
       </form>
       {lightningResult && <div className="success">{lightningResult}</div>}
       {lightningError && <div className="error">{lightningError}</div>}
@@ -228,13 +200,9 @@ const GenerateLightningInvoice = () => {
     setError('')
     setGenerating(true)
     try {
-      const response = await wallet.lightning.createInvoice(
-        Number(amount),
-        description,
-      )
+      const response = await wallet.lightning.createInvoice(Number(amount), description)
       setInvoice(response.invoice)
     } catch (e) {
-      console.error('Error generating Lightning invoice', e)
       setError(e instanceof Error ? e.message : String(e))
     } finally {
       setGenerating(false)
@@ -242,47 +210,44 @@ const GenerateLightningInvoice = () => {
   }
 
   return (
-    <div className="section">
-      <h3>Generate Lightning Invoice</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label htmlFor="amount">Amount (sats):</label>
+    <div className="bg-gray-900 p-6 rounded-lg">
+      <h2 className="text-xl font-semibold mb-4">Generate Lightning Invoice</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
           <input
-            id="amount"
             type="number"
-            placeholder="Enter amount"
-            required
+            placeholder="Amount (sats)"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>
-        <div className="input-group">
-          <label htmlFor="description">Description:</label>
+        <div>
           <input
-            id="description"
-            placeholder="Enter description"
-            required
+            placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-        <button type="submit" disabled={generating}>
+        <button type="submit" disabled={generating} className="w-full hover:cursor-pointer">
           {generating ? 'Generating...' : 'Generate Invoice'}
         </button>
       </form>
-      <div>
-        mutinynet faucet:{' '}
-        <a href="https://faucet.mutinynet.com/" target="_blank">
-          https://faucet.mutinynet.com/
+      
+      <div className="mt-4 text-gray-400">
+        <a href="https://faucet.mutinynet.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-gray-200">
+          Mutinynet Faucet <ExternalLink size={16} />
         </a>
       </div>
+
       {invoice && (
         <div className="success">
-          <strong>Generated Invoice:</strong>
+          <div className="flex items-center justify-between gap-2 mt-2">
+            <span className="font-medium">Generated Invoice:</span>
+            <button onClick={() => navigator.clipboard.writeText(invoice)} className="flex items-center gap-1 hover:cursor-pointer">
+              <Copy size={16} /> Copy
+            </button>
+          </div>
           <pre className="invoice-wrap">{invoice}</pre>
-          <button onClick={() => navigator.clipboard.writeText(invoice)}>
-            Copy
-          </button>
         </div>
       )}
       {error && <div className="error">{error}</div>}
