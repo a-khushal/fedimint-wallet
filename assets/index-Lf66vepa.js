@@ -16513,11 +16513,69 @@ const createLucideIcon = (iconName, iconNode) => {
  */
 
 
-const __iconNode$1 = [
-  ["rect", { width: "14", height: "14", x: "8", y: "8", rx: "2", ry: "2", key: "17jyea" }],
-  ["path", { d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2", key: "zix9uf" }]
+const __iconNode$4 = [
+  ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
+  ["path", { d: "M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2", key: "4jdomd" }],
+  ["path", { d: "M16 4h2a2 2 0 0 1 2 2v4", key: "3hqy98" }],
+  ["path", { d: "M21 14H11", key: "1bme5i" }],
+  ["path", { d: "m15 10-4 4 4 4", key: "5dvupr" }]
 ];
-const Copy = createLucideIcon("Copy", __iconNode$1);
+const ClipboardCopy = createLucideIcon("ClipboardCopy", __iconNode$4);
+
+/**
+ * @license lucide-react v0.483.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$3 = [
+  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
+  ["polyline", { points: "7 10 12 15 17 10", key: "2ggqvy" }],
+  ["line", { x1: "12", x2: "12", y1: "15", y2: "3", key: "1vk2je" }]
+];
+const Download = createLucideIcon("Download", __iconNode$3);
+
+/**
+ * @license lucide-react v0.483.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$2 = [
+  [
+    "path",
+    {
+      d: "M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z",
+      key: "1ffxy3"
+    }
+  ],
+  ["path", { d: "m21.854 2.147-10.94 10.939", key: "12cjpa" }]
+];
+const Send = createLucideIcon("Send", __iconNode$2);
+
+/**
+ * @license lucide-react v0.483.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$1 = [
+  [
+    "path",
+    {
+      d: "M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1",
+      key: "18etb6"
+    }
+  ],
+  ["path", { d: "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4", key: "xoc0q4" }]
+];
+const Wallet = createLucideIcon("Wallet", __iconNode$1);
 
 /**
  * @license lucide-react v0.483.0 - ISC
@@ -16528,11 +16586,15 @@ const Copy = createLucideIcon("Copy", __iconNode$1);
 
 
 const __iconNode = [
-  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
-  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
-  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
+  [
+    "path",
+    {
+      d: "M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z",
+      key: "1xq2db"
+    }
+  ]
 ];
-const ExternalLink = createLucideIcon("ExternalLink", __iconNode);
+const Zap = createLucideIcon("Zap", __iconNode);
 
 const TESTNET_FEDERATION_CODE = "fed11qgqrgvnhwden5te0v9k8q6rp9ekh2arfdeukuet595cr2ttpd3jhq6rzve6zuer9wchxvetyd938gcewvdhk6tcqqysptkuvknc7erjgf4em3zfh90kffqf9srujn6q53d6r056e4apze5cw27h75";
 globalThis.wallet = wallet;
@@ -16555,43 +16617,65 @@ const useBalance = (checkIsOpen) => {
       checkIsOpen();
       setBalance(balance2);
     });
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, [checkIsOpen]);
   return balance;
 };
 const App = () => {
   const { open, checkIsOpen } = useIsOpen();
   const balance = useBalance(checkIsOpen);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-black p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-2xl mx-auto space-y-8", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(WalletStatus, { open, checkIsOpen, balance }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(JoinFederation, { open, checkIsOpen }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(GenerateLightningInvoice, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(RedeemEcash, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(SendLightning, {})
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "container mx-auto px-4 py-8 max-w-4xl", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "mb-12", children: /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-4xl font-bold mb-8 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent", children: "Fedimint Typescript Library Demo" }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "space-y-8", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(WalletStatus, { open, checkIsOpen, balance }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(JoinFederation, { open, checkIsOpen }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(GenerateLightningInvoice, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(RedeemEcash, {}),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(SendLightning, {})
+    ] })
   ] }) });
 };
-const WalletStatus = ({ open, checkIsOpen, balance }) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 p-6 rounded-lg", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-4", children: "Wallet Status" }),
+const WalletStatus = ({
+  open,
+  checkIsOpen,
+  balance
+}) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-800 rounded-lg p-6 shadow-xl border border-gray-700", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Wallet, { className: "w-6 h-6 text-blue-400" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-semibold", children: "Wallet Status" })
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Wallet Status" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-gray-400", children: "Is Wallet Open?" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: open ? "text-green-400" : "text-red-400", children: open ? "Open" : "Closed" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: checkIsOpen, className: "text-sm hover:cursor-pointer", children: "Check" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `${open ? "text-green-400" : "text-red-400"}`, children: open ? "Yes" : "No" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: () => checkIsOpen(),
+              className: "px-3 py-1 bg-blue-500 hover:bg-blue-600 rounded text-sm transition-colors cursor-pointer",
+              children: "Check"
+            }
+          )
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Balance" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-          balance,
-          " sats"
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-gray-400", children: "Balance:" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl font-mono text-blue-400", children: balance }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gray-500", children: "sats" })
         ] })
       ] })
     ] })
   ] });
 };
-const JoinFederation = ({ open, checkIsOpen }) => {
+const JoinFederation = ({
+  open,
+  checkIsOpen
+}) => {
   const [inviteCode, setInviteCode] = reactExports.useState(TESTNET_FEDERATION_CODE);
   const [joinResult, setJoinResult] = reactExports.useState(null);
   const [joinError, setJoinError] = reactExports.useState("");
@@ -16599,35 +16683,61 @@ const JoinFederation = ({ open, checkIsOpen }) => {
   const joinFederation = async (e) => {
     e.preventDefault();
     checkIsOpen();
+    console.log("Joining federation:", inviteCode);
     try {
       setJoining(true);
-      await wallet.joinFederation(inviteCode);
-      setJoinResult("Successfully joined federation");
+      const res = await wallet.joinFederation(inviteCode);
+      console.log("join federation res", res);
+      setJoinResult("Joined!");
       setJoinError("");
     } catch (e2) {
+      console.log("Error joining federation", e2);
       setJoinError(typeof e2 === "object" ? e2.toString() : e2);
       setJoinResult("");
     } finally {
       setJoining(false);
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 p-6 rounded-lg", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-4", children: "Join Federation" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: joinFederation, className: "space-y-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          placeholder: "Federation invite code...",
-          value: inviteCode,
-          onChange: (e) => setInviteCode(e.target.value),
-          disabled: open
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", disabled: open || joining, className: "w-full hover:cursor-pointer", children: joining ? "Joining..." : "Join Federation" })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-800 rounded-lg p-6 shadow-xl border border-gray-700", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Download, { className: "w-6 h-6 text-blue-400" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-semibold", children: "Join Federation" })
     ] }),
-    !joinResult && open && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-gray-400 italic", children: "Already joined a federation" }),
-    joinResult && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "success", children: joinResult }),
-    joinError && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "error", children: joinError })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: joinFederation, className: "space-y-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            className: "flex-1 bg-gray-900 border border-gray-700 rounded px-4 py-2 text-gray-300 focus:outline-none focus:border-blue-500",
+            placeholder: "Invite Code...",
+            required: true,
+            value: inviteCode,
+            onChange: (e) => setInviteCode(e.target.value),
+            disabled: open
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "submit",
+            disabled: open || joining,
+            className: "px-6 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed rounded font-medium transition-colors cursor-pointer",
+            children: joining ? "Joining..." : "Join"
+          }
+        )
+      ] }),
+      !joinResult && open && /* @__PURE__ */ jsxRuntimeExports.jsx("i", { className: "block text-gray-500", children: "You've already joined a federation" }),
+      joinResult && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-green-400 flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "✓" }),
+        " ",
+        joinResult
+      ] }),
+      joinError && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-red-400 flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "⚠" }),
+        " ",
+        joinError
+      ] })
+    ] })
   ] });
 };
 const RedeemEcash = () => {
@@ -16637,30 +16747,53 @@ const RedeemEcash = () => {
   const handleRedeem = async (e) => {
     e.preventDefault();
     try {
-      await wallet.mint.redeemEcash(ecashInput);
-      setRedeemResult("Successfully redeemed ecash");
+      const res = await wallet.mint.redeemEcash(ecashInput);
+      console.log("redeem ecash res", res);
+      setRedeemResult("Redeemed!");
       setRedeemError("");
-      setEcashInput("");
     } catch (e2) {
+      console.log("Error redeeming ecash", e2);
       setRedeemError(e2);
       setRedeemResult("");
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 p-6 rounded-lg", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-4", children: "Redeem Ecash" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleRedeem, className: "space-y-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          placeholder: "Enter ecash string...",
-          value: ecashInput,
-          onChange: (e) => setEcashInput(e.target.value)
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", className: "w-full hover:cursor-pointer", children: "Redeem Ecash" })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-800 rounded-lg p-6 shadow-xl border border-gray-700", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Download, { className: "w-6 h-6 text-blue-400" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-semibold", children: "Redeem Ecash" })
     ] }),
-    redeemResult && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "success", children: redeemResult }),
-    redeemError && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "error", children: redeemError })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleRedeem, className: "space-y-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            className: "flex-1 bg-gray-900 border border-gray-700 rounded px-4 py-2 text-gray-300 focus:outline-none focus:border-blue-500",
+            placeholder: "Long ecash string...",
+            required: true,
+            value: ecashInput,
+            onChange: (e) => setEcashInput(e.target.value)
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "submit",
+            className: "px-6 py-2 bg-blue-500 hover:bg-blue-600 rounded font-medium transition-colors cursor-pointer",
+            children: "Redeem"
+          }
+        )
+      ] }),
+      redeemResult && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-green-400 flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "✓" }),
+        " ",
+        redeemResult
+      ] }),
+      redeemError && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-red-400 flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "⚠" }),
+        " ",
+        redeemError
+      ] })
+    ] })
   ] });
 };
 const SendLightning = () => {
@@ -16671,29 +16804,51 @@ const SendLightning = () => {
     e.preventDefault();
     try {
       await wallet.lightning.payInvoice(lightningInput);
-      setLightningResult("Payment successful");
+      setLightningResult("Paid!");
       setLightningError("");
-      setLightningInput("");
     } catch (e2) {
+      console.log("Error paying lightning", e2);
       setLightningError(e2);
       setLightningResult("");
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 p-6 rounded-lg", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-4", children: "Pay Lightning Invoice" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "space-y-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          placeholder: "Enter lightning invoice (lnbc...)",
-          value: lightningInput,
-          onChange: (e) => setLightningInput(e.target.value)
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", className: "w-full hover:cursor-pointer", children: "Pay Invoice" })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-800 rounded-lg p-6 shadow-xl border border-gray-700", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "w-6 h-6 text-blue-400" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-semibold", children: "Pay Lightning" })
     ] }),
-    lightningResult && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "success", children: lightningResult }),
-    lightningError && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "error", children: lightningError })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "space-y-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "input",
+          {
+            className: "flex-1 bg-gray-900 border border-gray-700 rounded px-4 py-2 text-gray-300 focus:outline-none focus:border-blue-500",
+            placeholder: "lnbc...",
+            required: true,
+            value: lightningInput,
+            onChange: (e) => setLightningInput(e.target.value)
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            type: "submit",
+            className: "px-6 py-2 bg-blue-500 hover:bg-blue-600 rounded font-medium transition-colors cursor-pointer",
+            children: "Pay"
+          }
+        )
+      ] }),
+      lightningResult && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-green-400 flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "✓" }),
+        " ",
+        lightningResult
+      ] }),
+      lightningError && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-red-400 flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "⚠" }),
+        " ",
+        lightningError
+      ] })
+    ] })
   ] });
 };
 const GenerateLightningInvoice = () => {
@@ -16702,61 +16857,120 @@ const GenerateLightningInvoice = () => {
   const [invoice, setInvoice] = reactExports.useState("");
   const [error, setError] = reactExports.useState("");
   const [generating, setGenerating] = reactExports.useState(false);
+  const [copySuccess, setCopySuccess] = reactExports.useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setInvoice("");
     setError("");
     setGenerating(true);
     try {
-      const response = await wallet.lightning.createInvoice(Number(amount), description);
+      const response = await wallet.lightning.createInvoice(
+        Number(amount),
+        description
+      );
       setInvoice(response.invoice);
     } catch (e2) {
+      console.error("Error generating Lightning invoice", e2);
       setError(e2 instanceof Error ? e2.message : String(e2));
     } finally {
       setGenerating(false);
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-900 p-6 rounded-lg", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-xl font-semibold mb-4", children: "Generate Lightning Invoice" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "space-y-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          type: "number",
-          placeholder: "Amount (sats)",
-          value: amount,
-          onChange: (e) => setAmount(e.target.value)
-        }
-      ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          placeholder: "Description",
-          value: description,
-          onChange: (e) => setDescription(e.target.value)
-        }
-      ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "submit", disabled: generating, className: "w-full hover:cursor-pointer", children: generating ? "Generating..." : "Generate Invoice" })
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(invoice);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2e3);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-gray-800 rounded-lg p-6 shadow-xl border border-gray-700", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Zap, { className: "w-6 h-6 text-blue-400" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-xl font-semibold", children: "Generate Lightning Invoice" })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 text-gray-400", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "https://faucet.mutinynet.com/", target: "_blank", rel: "noopener noreferrer", className: "flex items-center gap-2 hover:text-gray-200", children: [
-      "Mutinynet Faucet ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { size: 16 })
-    ] }) }),
-    invoice && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "success", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2 mt-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium", children: "Generated Invoice:" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => navigator.clipboard.writeText(invoice), className: "flex items-center gap-1 hover:cursor-pointer", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { size: 16 }),
-          " Copy"
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "space-y-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "amount", className: "block text-gray-400 mb-1", children: "Amount (sats):" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              id: "amount",
+              type: "number",
+              className: "w-full bg-gray-900 border border-gray-700 rounded px-4 py-2 text-gray-300 focus:outline-none focus:border-blue-500",
+              placeholder: "Enter amount",
+              required: true,
+              value: amount,
+              onChange: (e) => setAmount(e.target.value)
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("label", { htmlFor: "description", className: "block text-gray-400 mb-1", children: "Description:" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "input",
+            {
+              id: "description",
+              className: "w-full bg-gray-900 border border-gray-700 rounded px-4 py-2 text-gray-300 focus:outline-none focus:border-blue-500",
+              placeholder: "Enter description",
+              required: true,
+              value: description,
+              onChange: (e) => setDescription(e.target.value)
+            }
+          )
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "invoice-wrap", children: invoice })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "submit",
+          disabled: generating,
+          className: "w-full px-6 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed rounded font-medium transition-colors cursor-pointer",
+          children: generating ? "Generating..." : "Generate Invoice"
+        }
+      )
     ] }),
-    error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "error", children: error })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 text-gray-400", children: [
+      "mutinynet faucet:",
+      " ",
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "a",
+        {
+          href: "https://faucet.mutinynet.com/",
+          target: "_blank",
+          className: "text-blue-400 hover:text-blue-300 underline",
+          children: "https://faucet.mutinynet.com/"
+        }
+      )
+    ] }),
+    invoice && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 p-4 bg-gray-900 rounded-lg border border-gray-700", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-gray-400", children: "Generated Invoice:" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "button",
+          {
+            onClick: handleCopy,
+            className: "flex items-center gap-1 text-blue-400 hover:text-blue-300 cursor-pointer transition-colors",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(ClipboardCopy, { className: "w-4 h-4" }),
+              copySuccess ? "Copied!" : "Copy"
+            ]
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "text-sm text-gray-300 break-all whitespace-pre-wrap", children: invoice })
+    ] }),
+    error && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 text-red-400 flex items-center gap-2", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "⚠" }),
+      " ",
+      error
+    ] })
   ] });
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(React$2.StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) })
 );
-//# sourceMappingURL=index-D3Eve_pU.js.map
+//# sourceMappingURL=index-Lf66vepa.js.map
